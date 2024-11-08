@@ -1,0 +1,132 @@
+# TypeScript, React Native, and Expo Development Guidelines
+
+code_style:
+  - Write concise and precise TypeScript code.
+  - Prefer functional and declarative programming; avoid classes.
+  - Modularize code and avoid duplication.
+  - Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
+  - Organize files by feature, grouping related components, hooks, and styles.
+  - Use named exports for components and utilities.
+
+naming_conventions:
+  - Use lowercase with dashes for directories (e.g., user-profile, chat-screen).
+  - Use PascalCase for component names (e.g., UserProfile).
+  - Use camelCase for variables and functions (e.g., isFetchingData, handleUserInput).
+
+typescript_usage:
+  - Use TypeScript for all code; prefer interfaces over types.
+  - Avoid any; strive for precise types and enable strict mode in tsconfig.json.
+  - Utilize React.FC for functional components.
+  - Avoid enums; use maps instead.
+
+syntax_and_formatting:
+  - Use the function keyword for pure functions.
+  - Avoid unnecessary curly braces in conditionals; use concise syntax.
+  - Use declarative JSX.
+  - Format code with Prettier.
+
+ui_and_styling:
+  - Use Expo's built-in components and styled-components or Tailwind CSS for styling.
+  - Implement responsive design with Flexbox and useWindowDimensions.
+  - Support dark mode with useColorScheme.
+  - Follow accessibility standards using ARIA roles and native props.
+  - Use react-native-reanimated and react-native-gesture-handler for animations.
+
+safe_area_management:
+  - Use SafeAreaProvider from react-native-safe-area-context.
+  - Wrap components with SafeAreaView for screen insets.
+  - Avoid hardcoding padding/margins; use context hooks.
+
+performance_optimization:
+  - Minimize useState and useEffect; use context and useReducer.
+  - Use React.memo() for static prop components.
+  - Optimize FlatList with removeClippedSubviews, maxToRenderPerBatch, windowSize.
+  - Avoid anonymous functions in renderItem and event handlers.
+  - Implement Suspense and dynamic loading for better performance.
+
+
+rules:
+  - description: "Use TypeScript para todos os componentes e siga a tipagem estrita"
+    match: "*.tsx"
+    actions:
+      - enforce_typescript: true
+      - strict_mode: true
+
+  - description: "Use funções em vez de classes para componentes"
+    match: "*.tsx"
+    actions:
+      - enforce_function_components: true
+      - ban_classes: true
+
+  - description: "Organize arquivos por funcionalidade"
+    match: "*"
+    actions:
+      - recommend_structure:
+          pattern: "feature-based"
+          
+  - description: "Prefira interfaces em vez de types"
+    match: "*.tsx"
+    actions:
+      - enforce_prefer_interfaces: true
+
+  - description: "Evite enums, use mapas em vez disso"
+    match: "*.tsx"
+    actions:
+      - ban_enums: true
+      - recommend_alternatives:
+          alternative: "Mapas (e.g., objetos chave-valor)"
+
+  - description: "Utilize nomes de variáveis descritivos"
+    match: "*"
+    actions:
+      - enforce_variable_naming:
+          pattern: "camelCase"
+
+  - description: "Utilize Prettier para formatação consistente"
+    match: "*"
+    actions:
+      - recommend_formatter:
+          tool: "Prettier"
+
+  - description: "Implemente design responsivo com Flexbox e Tailwind CSS"
+    match: "*.tsx"
+    actions:
+      - recommend_styling_tools:
+          tools:
+            - "Flexbox"
+            - "Tailwind CSS"
+            
+  - description: "Use SafeAreaProvider e SafeAreaView para gerenciamento de áreas seguras"
+    match: "*.tsx"
+    actions:
+      - enforce_safe_area_usage: true
+
+  - description: "Priorize hooks como useMemo e useCallback para otimização de performance"
+    match: "*.tsx"
+    actions:
+      - recommend_hooks_for_performance:
+          hooks:
+            - "useMemo"
+            - "useCallback"
+
+  - description: "Use expo-error-reporter e Sentry para tratamento de erros"
+    match: "*.tsx"
+    actions:
+      - recommend_error_logging_tools:
+          tools:
+            - "expo-error-reporter"
+            - "Sentry"
+            
+  - description: "Siga as diretrizes de segurança do Expo"
+    match: "*.tsx"
+    actions:
+      - recommend_security_guidelines:
+          link: "https://docs.expo.dev/guides/security/"
+
+  - description: "Implemente testes com Jest e React Native Testing Library"
+    match: "*.test.tsx"
+    actions:
+      - enforce_testing_frameworks:
+          frameworks:
+            - "Jest"
+            - "React Native Testing Library"
