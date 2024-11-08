@@ -2,7 +2,7 @@ import { useAuth } from '@clerk/clerk-expo'
 import { useStripe } from '@stripe/stripe-react-native'
 import { router } from 'expo-router'
 import React, { useState } from 'react'
-import { Alert, Image, Text, View } from 'react-native'
+import { Alert, Image, Platform, Text, View } from 'react-native'
 import { ReactNativeModal } from 'react-native-modal'
 
 import { CustomButton } from '@/components/custom-button'
@@ -38,6 +38,27 @@ export function Payment({ fullName, email, amount, driverId, rideTime }: Payment
 	}
 	const initializePaymentSheet = async () => {
 		const { error } = await initPaymentSheet({
+			appearance: {
+				colors: {
+					background: '#ffffff',
+					componentBackground: '#f3f8fa',
+					componentDivider: '#000000', // Divisores dos componentes
+					primaryText: '#000000', // Texto principal
+					secondaryText: '#000000', // Texto secundário
+					componentText: '#000000', // Texto dos componentes
+					placeholderText: '#73757b',
+				},
+				shapes: {
+					borderRadius: 12, // Raio das bordas
+					borderWidth: 0.5, // Largura das bordas
+				},
+				primaryButton: {
+					shapes: {
+						borderRadius: 20, // Raio das bordas do botão principal
+					},
+				},
+			},
+
 			merchantDisplayName: 'Example, Inc.',
 			intentConfiguration: {
 				mode: {

@@ -1,10 +1,22 @@
 import { icons } from '@/constant'
-import { Image, Text, View } from 'react-native'
+import { googleOAuth } from '@/lib/auth'
+import { useOAuth } from '@clerk/clerk-expo'
+import { router } from 'expo-router'
+import { Alert, Image, Text, View } from 'react-native'
 import { CustomButton } from './custom-button'
 
 export function OAuth() {
-	async function handleGoogleSignIn() {
-		console.log('Google Sign In')
+	const { startOAuthFlow } = useOAuth({ strategy: 'oauth_google' })
+
+	const handleGoogleSignIn = async () => {
+		const result = await googleOAuth(startOAuthFlow)
+
+		if (result.code === 'success') {
+			Alert.alert('Success', 'Redirecting to home screen.')
+			router.replace('/(root)/(tabs)/home')
+		}
+
+		Alert.alert(result.success ? 'Success' : 'Error', result.message)
 	}
 	return (
 		<View className=''>

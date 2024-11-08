@@ -168,7 +168,6 @@ export default function Page() {
 			<FlatList
 				data={recentRides?.slice(0, 5)}
 				renderItem={({ item }) => {
-					console.log(item)
 					return <RideCard ride={item} />
 				}}
 				keyExtractor={(item, index) => index.toString()}
